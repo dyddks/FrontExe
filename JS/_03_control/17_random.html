@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    document.addEventListener('DONContentLoaded', () => {
+      const btn = document.getElementById('btnStart')
+      bnt.addEventListener('click', () => {
+        const luckyVal = parseInt(Math.random()*10+1)
+        console.log(luckyVal)
+        switch (luckyVal) {
+          case 3:
+            console.log('냉장고 당첨')
+            break
+          case 5:
+            console.log('세탁기 당첨')
+            break
+          case 7:
+            console.log('노트북 당첨') 
+            break
+          default:
+            console.log('꽝')
+        }
+      })
+    })
+  </script>
+</head>
+<body>
+  <button id="btnStart">추첨</button>
+</body>
+</html>
