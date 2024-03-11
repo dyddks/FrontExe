@@ -1,0 +1,60 @@
+<!-- 물고기를 상자에 띄우고
+물고기를 5초안에 최대한 클릭할 것
+클릭한 횟수가 상자위에 출력될것
+5초가 지나면 더이상 클릭횟수가 증가하지 않음 
+
+물고기는 0.2초마다 위치를 옮겨다닐것 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #panel{
+      width: 400px;
+      height: 300px;
+      border: 1px solid #999;
+      position: relative;
+    }
+    #fish{
+      position: absolute;
+      left: 50px;
+      top:120px;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let fish = document.querySelector('#fish');
+      let cnt = document.querySelector('#count');
+      let count = 0;
+
+      const clickFish = (e) => {
+        count++;
+        cnt.textContent ='현재 점수 : ' + count;
+      }
+
+      fish.addEventListener('click', clickFish)
+      
+      const interval = setInterval(() => {
+        let x = Math.random()*280;
+        let y = Math.random()*209 + 21;
+        fish.style.left = x + "px";
+        fish.style.top = y + "px";
+      }, 100)
+
+      setTimeout(() => {
+        fish.removeEventListener('click', clickFish);
+        alert('게임이 종료되었습니다.');
+        clearInterval(interval);
+      }, 10000)
+    })
+  </script>
+</head>
+<body>
+  <div id="count">현재 점수 : 0</div>
+  <div id="panel">
+    <img src="../../../images2/fish1.png" alt="" id="fish">
+  </div>
+</body>
+</html>
