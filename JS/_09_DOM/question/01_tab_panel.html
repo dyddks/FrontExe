@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .tab-menu {
+      list-style: none;
+      height: 80px;
+      display: flex;
+    }
+
+    .tab-menu li {
+      width: 99px;
+      height: 40px;
+      background-position-y: 0;
+      text-indent: -1000px;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .tab-menu li:hover {
+      background-position-y: -40px;
+    }
+
+    .tab-menu li.select {
+      background-position-y: -80px;
+      height: 80px;
+    }
+
+    .tab-menu li.menuitem1 {
+      background-image: url('../../../images2/newbtn.bar.1.png');
+    }
+
+    .tab-menu li.menuitem2 {
+      background-image: url('../../../images2/newbtn.bar.2.png');
+    }
+
+    .tab-menu li.menuitem3 {
+      background-image: url('../../../images2/newbtn.bar.3.png');
+    }
+
+    .tab-menu li.menuitem4 {
+      background-image: url('../../../images2/newbtn.bar.4.png');
+    }
+
+    .tab-menu li.menuitem5 {
+      background-image: url('../../../images2/newbtn.bar.5.png');
+    }
+
+    .tab-contents {
+      position: relative;
+      left: 10px;
+      top: 10px;
+      width: 780px;
+      height: 340px;
+      overflow: hidden;
+      background: url('../../../images2/content_bg.png') no-repeat;
+    }
+
+    .tab-contents .content {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      display: none;
+    }
+
+    .tab-contents .content.select {
+      display: block;
+    }
+  </style>
+  <script>
+    let tabMenu = function (selector) {
+      let $selectMenuItem = null;
+      let $selectList = document.querySelectorAll(selector);
+      let $selectContent = document.querySelectorAll('.tab-contents .content');
+
+      for (let $selector of $selectList) {
+        $selector.addEventListener('click', function (e) {
+          // li중에 선택항목이 있고, 그 항목이 select라는 클래스를 가지고 있다면
+          if ($selectMenuItem !== null && $selectMenuItem.classList.contains('select')) {
+            $selectMenuItem.classList.remove('select');
+          }
+          
+          // 현재 클릭해서 선택한 li요소를 저장한다.
+          $selectMenuItem = e.currentTarget;
+
+          // 선택항목에 동적으로 select클래스를 삽입한다.
+          $selectMenuItem.classList.add('select');
+          
+          for(let $content of $selectContent){
+            if ($content !== null && $content.classList.contains('select')) {
+              $content.classList.remove('select');
+            }
+            if($content.querySelector('img').src.includes(`${$selectMenuItem.textContent}`)){
+              $content.classList.add('select');
+            }
+          }
+        });
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      tabMenu('.tab-menu li');
+    });
+  </script>
+</head>
+
+<body>
+  <ul class="tab-menu">
+    <li class="menuitem1">google</li>
+    <li class="menuitem2">facebook</li>
+    <li class="menuitem3">pinterest</li>
+    <li class="menuitem4">twitter</li>
+    <li class="menuitem5">path</li>
+  </ul>
+
+  <div class="tab-contents">
+    <div class="content">
+      <img src="../../../images2/content_google.png" alt="">
+    </div>
+    <div class="content">
+      <img src="../../../images2/content_facebook.png" alt="">
+    </div>
+    <div class="content">
+      <img src="../../../images2/content_pinterest.png" alt="">
+    </div>
+    <div class="content">
+      <img src="../../../images2/content_twitter.png" alt="">
+    </div>
+    <div class="content">
+      <img src="../../../images2/content_path.png" alt="">
+    </div>
+  </div>
+</body>
+
+</html>
